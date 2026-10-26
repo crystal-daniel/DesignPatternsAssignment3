@@ -18,8 +18,19 @@ public class Driver {
 		System.out.println(student.getMajor() + " at " + student.getUniversity());
 		System.out.println(student.getCourses());
 
-		LocalTime meetingTime = LocalTime.of(14, 30);
-		System.out.println("Meeting at " + meetingTime
-				+ " conflicts: " + student.timeConflict(meetingTime));
+		// Test 1: overlaps CS542 (1:30-2:30pm) plus its 15-minute buffer
+		LocalTime meeting1 = LocalTime.of(14, 30);
+		System.out.println("Test 1: meeting at " + meeting1);
+		System.out.println("  Expected: true");
+		System.out.println("  Actual:   " + student.timeConflict(meeting1));
+		System.out.println("  Reason:   overlaps CS542 (1:30-2:30pm) plus its 15-minute buffer");
+		System.out.println();
+
+		// Test 2: after CS551 (ends 4:00pm, buffer ends 4:15pm)
+		LocalTime meeting2 = LocalTime.of(17, 0);
+		System.out.println("Test 2: meeting at " + meeting2);
+		System.out.println("  Expected: false");
+		System.out.println("  Actual:   " + student.timeConflict(meeting2));
+		System.out.println("  Reason:   the last class, CS551, ends at 4:00pm, so its buffer ends at 4:15pm");
 	}
 }
